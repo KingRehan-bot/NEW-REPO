@@ -1,0 +1,639 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Rehan Shaikh | Portfolio</title>
+<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Rajdhani:wght@300;400;500;600;700&family=JetBrains+Mono:wght@300;400;700&display=swap" rel="stylesheet"/>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
+<style>
+:root {
+  --bg:#050a14;--bg2:#080f1e;--card:rgba(10,20,40,0.7);--border:rgba(0,212,255,0.15);
+  --accent:#00d4ff;--accent2:#7b2fff;--accent3:#ff4d6d;--text:#e0eaf8;--muted:#7a96b5;
+  --glow:0 0 20px rgba(0,212,255,0.4);--glow2:0 0 20px rgba(123,47,255,0.4);
+  --font-head:'Orbitron',monospace;--font-body:'Rajdhani',sans-serif;--font-mono:'JetBrains Mono',monospace;
+  --transition:all 0.35s cubic-bezier(.4,0,.2,1);
+}
+.light-mode {
+  --bg:#f0f4ff;--bg2:#e4eaf8;--card:rgba(255,255,255,0.8);--border:rgba(0,100,200,0.18);
+  --accent:#006aff;--accent2:#7b2fff;--accent3:#ff4d6d;--text:#0a1a2e;--muted:#4a6080;
+  --glow:0 0 20px rgba(0,106,255,0.25);
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+html{scroll-behavior:smooth;}
+body{background:var(--bg);color:var(--text);font-family:var(--font-body);overflow-x:hidden;cursor:none;transition:background 0.4s,color 0.4s;}
+
+/* CURSOR */
+#cursor-dot{width:8px;height:8px;background:var(--accent);border-radius:50%;position:fixed;top:0;left:0;pointer-events:none;z-index:9999;transform:translate(-50%,-50%);transition:width .15s,height .15s,background .2s;box-shadow:var(--glow);}
+#cursor-ring{width:36px;height:36px;border:2px solid var(--accent);border-radius:50%;position:fixed;top:0;left:0;pointer-events:none;z-index:9998;transform:translate(-50%,-50%);transition:width .2s,height .2s,border-color .2s;opacity:.7;}
+
+/* PARTICLES */
+#particles{position:fixed;top:0;left:0;width:100%;height:100%;z-index:0;pointer-events:none;}
+
+::-webkit-scrollbar{width:5px;}
+::-webkit-scrollbar-track{background:var(--bg2);}
+::-webkit-scrollbar-thumb{background:var(--accent);border-radius:3px;}
+
+/* NAV */
+nav{position:fixed;top:0;left:0;right:0;z-index:1000;display:flex;align-items:center;justify-content:space-between;padding:.8rem 2.5rem;background:rgba(5,10,20,0.88);backdrop-filter:blur(18px);border-bottom:1px solid var(--border);transition:var(--transition);}
+.light-mode nav{background:rgba(240,244,255,0.9);}
+.nav-logo{font-family:var(--font-head);font-size:1.15rem;color:var(--accent);letter-spacing:3px;text-decoration:none;}
+.nav-links{display:flex;gap:1.8rem;list-style:none;}
+.nav-links a{color:var(--muted);text-decoration:none;font-family:var(--font-body);font-size:.95rem;font-weight:600;letter-spacing:1px;position:relative;padding-bottom:4px;transition:color .25s;}
+.nav-links a::after{content:'';position:absolute;bottom:0;left:0;width:0;height:2px;background:var(--accent);transition:width .3s;}
+.nav-links a:hover{color:var(--accent);}
+.nav-links a:hover::after{width:100%;}
+#dark-toggle{background:none;border:1.5px solid var(--border);border-radius:30px;color:var(--accent);font-size:1.1rem;padding:.35rem .75rem;cursor:pointer;transition:var(--transition);}
+#dark-toggle:hover{background:var(--accent);color:#fff;box-shadow:var(--glow);}
+.hamburger{display:none;flex-direction:column;gap:5px;cursor:pointer;}
+.hamburger span{width:25px;height:2px;background:var(--accent);border-radius:2px;transition:.3s;}
+.mobile-nav{display:none;flex-direction:column;gap:.8rem;position:fixed;top:58px;left:0;right:0;background:rgba(5,10,20,.97);padding:1.5rem 2rem;z-index:999;border-bottom:1px solid var(--border);}
+.mobile-nav.open{display:flex;}
+.mobile-nav a{color:var(--text);font-size:1.1rem;font-weight:600;text-decoration:none;padding:.4rem 0;border-bottom:1px solid var(--border);}
+
+/* SECTIONS */
+.wrap{position:relative;z-index:1;padding:6rem 2rem 4rem;max-width:1180px;margin:0 auto;}
+.section-title{font-family:var(--font-head);font-size:clamp(1.5rem,4vw,2.4rem);color:var(--accent);letter-spacing:3px;margin-bottom:.4rem;text-transform:uppercase;}
+.section-sub{color:var(--muted);font-size:1rem;margin-bottom:3rem;letter-spacing:1px;}
+.divider{width:60px;height:3px;background:linear-gradient(90deg,var(--accent),var(--accent2));border-radius:2px;margin-bottom:.8rem;}
+
+/* HERO */
+#home{min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding-top:80px;position:relative;z-index:1;}
+.hero-name{font-family:var(--font-head);font-size:clamp(2.4rem,8vw,5.5rem);font-weight:900;letter-spacing:5px;background:linear-gradient(135deg,var(--accent),var(--accent2),var(--accent3));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;animation:fadeInUp 1s ease both;line-height:1.1;}
+.hero-subtitle{font-family:var(--font-mono);font-size:clamp(.9rem,2vw,1.15rem);color:var(--accent);margin:1.2rem 0;letter-spacing:2px;animation:fadeInUp 1s .2s ease both;min-height:2em;}
+.hero-desc{max-width:680px;font-size:1.05rem;color:var(--muted);line-height:1.85;animation:fadeInUp 1s .4s ease both;margin:0 auto 2.5rem;}
+.hero-photo-wrap{width:170px;height:170px;border-radius:50%;border:3px solid var(--accent);box-shadow:0 0 40px rgba(0,212,255,.35),0 0 80px rgba(123,47,255,.2);overflow:hidden;margin-bottom:2rem;animation:fadeInUp 1s .05s ease both;}
+.hero-photo-wrap img{width:100%;height:100%;object-fit:cover;}
+.avatar-ph{width:100%;height:100%;background:linear-gradient(135deg,var(--accent2),var(--accent));display:flex;align-items:center;justify-content:center;font-family:var(--font-head);font-size:3.5rem;color:#fff;letter-spacing:2px;}
+.hero-btns{display:flex;gap:1.2rem;justify-content:center;flex-wrap:wrap;animation:fadeInUp 1s .6s ease both;}
+.btn{display:inline-flex;align-items:center;gap:.5rem;padding:.75rem 2rem;border-radius:40px;font-family:var(--font-body);font-size:1rem;font-weight:700;letter-spacing:1.5px;text-decoration:none;cursor:pointer;transition:var(--transition);border:none;}
+.btn-primary{background:linear-gradient(135deg,var(--accent),var(--accent2));color:#fff;box-shadow:var(--glow);}
+.btn-primary:hover{transform:translateY(-3px) scale(1.04);box-shadow:0 0 40px rgba(0,212,255,.6);}
+.btn-outline{background:transparent;color:var(--accent);border:2px solid var(--accent);}
+.btn-outline:hover{background:var(--accent);color:#050a14;transform:translateY(-3px);}
+.hero-scroll{margin-top:3rem;animation:bounce 2s infinite;color:var(--accent);font-size:1.5rem;}
+
+/* ABOUT */
+.about-grid{display:grid;grid-template-columns:1fr 1fr;gap:2rem;align-items:start;}
+.acard{background:var(--card);border:1px solid var(--border);border-radius:16px;padding:2rem;backdrop-filter:blur(12px);transition:var(--transition);}
+.acard:hover{border-color:var(--accent);box-shadow:var(--glow);transform:translateY(-4px);}
+.acard h3{font-family:var(--font-head);color:var(--accent);font-size:.9rem;letter-spacing:2px;margin-bottom:1rem;}
+.acard p,.acard li{color:var(--muted);font-size:1rem;line-height:1.8;}
+.acard ul{list-style:none;}
+.acard ul li{padding:.25rem 0;}
+.acard ul li::before{content:"▹ ";color:var(--accent);}
+.info-row{display:flex;align-items:center;gap:.7rem;margin-bottom:.7rem;color:var(--muted);font-size:1rem;}
+.info-row i{color:var(--accent);width:20px;}
+.skill-item{margin-bottom:1.1rem;}
+.skill-label{display:flex;justify-content:space-between;font-size:.92rem;font-weight:600;margin-bottom:.4rem;color:var(--text);}
+.skill-bar{height:7px;background:var(--bg2);border-radius:4px;overflow:hidden;border:1px solid var(--border);}
+.skill-fill{height:100%;border-radius:4px;background:linear-gradient(90deg,var(--accent),var(--accent2));width:0%;transition:width 1.5s cubic-bezier(.4,0,.2,1);box-shadow:var(--glow);}
+
+/* ACHIEVEMENTS */
+.ach-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(290px,1fr));gap:1.8rem;}
+.ach-card{background:var(--card);border:1px solid var(--border);border-radius:16px;padding:1.8rem;backdrop-filter:blur(12px);transition:var(--transition);position:relative;overflow:hidden;}
+.ach-card::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;background:linear-gradient(90deg,var(--accent),var(--accent2));}
+.ach-card:hover{transform:translateY(-5px);border-color:var(--accent);box-shadow:var(--glow);}
+.ach-thumb{width:100%;height:130px;border-radius:8px;margin-bottom:1rem;overflow:hidden;background:linear-gradient(135deg,var(--bg2),#0f1f3a);display:flex;align-items:center;justify-content:center;}
+.ach-thumb img{width:100%;height:100%;object-fit:cover;}
+.ach-ph{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:.4rem;color:var(--muted);font-size:.8rem;text-align:center;padding:.5rem;}
+.ach-ph i{font-size:2.2rem;color:var(--accent);opacity:.6;}
+.ach-icon{font-size:2rem;margin-bottom:.7rem;}
+.ach-card h3{font-family:var(--font-head);color:var(--accent);font-size:.85rem;letter-spacing:1px;margin-bottom:.5rem;}
+.ach-card p{color:var(--muted);font-size:.9rem;line-height:1.7;}
+.badge{display:inline-block;margin-top:.8rem;padding:.2rem .75rem;border-radius:20px;background:rgba(0,212,255,.1);border:1px solid var(--border);color:var(--accent);font-size:.75rem;font-family:var(--font-mono);}
+
+/* PROJECTS */
+.proj-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(310px,1fr));gap:2rem;}
+.proj-card{background:var(--card);border:1px solid var(--border);border-radius:16px;overflow:hidden;transition:var(--transition);backdrop-filter:blur(12px);}
+.proj-card:hover{transform:translateY(-6px);border-color:var(--accent2);box-shadow:var(--glow2);}
+.proj-img{width:100%;height:170px;overflow:hidden;background:linear-gradient(135deg,var(--bg2),#0f1f3a);display:flex;align-items:center;justify-content:center;font-size:3rem;}
+.proj-img img{width:100%;height:100%;object-fit:cover;}
+.proj-body{padding:1.5rem;}
+.proj-body h3{font-family:var(--font-head);color:var(--text);font-size:.9rem;letter-spacing:1px;margin-bottom:.5rem;}
+.proj-body p{color:var(--muted);font-size:.9rem;line-height:1.7;margin-bottom:1rem;}
+.tags{display:flex;flex-wrap:wrap;gap:.45rem;margin-bottom:.9rem;}
+.tag{padding:.18rem .65rem;border-radius:20px;font-size:.72rem;font-family:var(--font-mono);background:rgba(123,47,255,.15);border:1px solid rgba(123,47,255,.3);color:var(--accent2);}
+.proj-links a{color:var(--accent);font-size:.88rem;text-decoration:none;margin-right:1rem;transition:color .2s;}
+.proj-links a:hover{color:var(--accent3);}
+
+/* GALLERY */
+.gal-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(210px,1fr));gap:1rem;}
+.gal-item{border-radius:12px;overflow:hidden;border:1px solid var(--border);cursor:pointer;transition:var(--transition);aspect-ratio:1;background:var(--card);position:relative;}
+.gal-item img{width:100%;height:100%;object-fit:cover;transition:transform .4s;}
+.gal-ph{width:100%;height:100%;background:linear-gradient(135deg,var(--bg2),#0f1f3a);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:.5rem;color:var(--muted);font-size:.78rem;text-align:center;padding:1rem;}
+.gal-ph i{font-size:2rem;color:var(--accent);opacity:.6;}
+.gal-item:hover{transform:scale(1.04);border-color:var(--accent);box-shadow:var(--glow);}
+.gal-item:hover img{transform:scale(1.1);}
+.gal-ov{position:absolute;inset:0;background:rgba(5,10,20,.7);display:flex;align-items:center;justify-content:center;opacity:0;transition:opacity .3s;color:#fff;font-size:1.5rem;}
+.gal-item:hover .gal-ov{opacity:1;}
+
+/* LIGHTBOX */
+#lightbox{display:none;position:fixed;inset:0;z-index:5000;background:rgba(0,0,0,.92);align-items:center;justify-content:center;}
+#lightbox.active{display:flex;}
+#lightbox img{max-width:90vw;max-height:88vh;border-radius:10px;border:2px solid var(--accent);box-shadow:var(--glow);}
+#lb-close{position:absolute;top:20px;right:28px;font-size:2rem;color:#fff;cursor:pointer;transition:color .2s;z-index:5001;}
+#lb-close:hover{color:var(--accent3);}
+#lb-cap{position:absolute;bottom:18px;left:0;right:0;text-align:center;color:var(--muted);font-family:var(--font-mono);font-size:.88rem;}
+
+/* CONTACT */
+.contact-grid{display:grid;grid-template-columns:1fr 1fr;gap:3rem;}
+.contact-info h3{font-family:var(--font-head);color:var(--accent);font-size:.9rem;letter-spacing:2px;margin-bottom:1.5rem;}
+.clink{display:flex;align-items:center;gap:1rem;padding:1rem 1.2rem;border-radius:12px;background:var(--card);border:1px solid var(--border);margin-bottom:1rem;text-decoration:none;color:var(--text);transition:var(--transition);backdrop-filter:blur(8px);}
+.clink:hover{border-color:var(--accent);box-shadow:var(--glow);transform:translateX(5px);color:var(--accent);}
+.clink i{font-size:1.3rem;color:var(--accent);width:22px;}
+.clink span{font-size:.95rem;font-weight:600;}
+.cform{background:var(--card);border:1px solid var(--border);border-radius:16px;padding:2rem;backdrop-filter:blur(12px);}
+.cform h3{font-family:var(--font-head);color:var(--accent);font-size:.9rem;letter-spacing:2px;margin-bottom:1.5rem;}
+.fg{margin-bottom:1.1rem;}
+.fg label{display:block;font-size:.82rem;color:var(--muted);margin-bottom:.45rem;font-family:var(--font-mono);letter-spacing:1px;}
+.fg input,.fg textarea{width:100%;padding:.75rem 1rem;border-radius:8px;background:rgba(0,212,255,.04);border:1px solid var(--border);color:var(--text);font-family:var(--font-body);font-size:.95rem;transition:border-color .3s;outline:none;}
+.fg input:focus,.fg textarea:focus{border-color:var(--accent);box-shadow:var(--glow);}
+.fg textarea{resize:vertical;min-height:105px;}
+
+/* FOOTER */
+footer{position:relative;z-index:1;text-align:center;padding:2rem;border-top:1px solid var(--border);color:var(--muted);font-size:.88rem;}
+footer span{color:var(--accent);}
+
+/* ANIMATIONS */
+@keyframes fadeInUp{from{opacity:0;transform:translateY(30px)}to{opacity:1;transform:translateY(0)}}
+@keyframes bounce{0%,100%{transform:translateY(0)}50%{transform:translateY(-10px)}}
+.reveal{opacity:0;transform:translateY(40px);transition:opacity .8s ease,transform .8s ease;}
+.reveal.visible{opacity:1;transform:translateY(0);}
+
+/* RESPONSIVE */
+@media(max-width:900px){.about-grid,.contact-grid{grid-template-columns:1fr;}}
+@media(max-width:640px){
+  nav{padding:.7rem 1.2rem;}
+  .nav-links{display:none;}
+  .hamburger{display:flex;}
+  .wrap{padding:5rem 1.2rem 3rem;}
+  .hero-name{letter-spacing:2px;}
+}
+</style>
+</head>
+<body>
+
+<!-- CURSOR -->
+<div id="cursor-dot"></div>
+<div id="cursor-ring"></div>
+
+<!-- PARTICLES -->
+<canvas id="particles"></canvas>
+
+<!-- LIGHTBOX -->
+<div id="lightbox">
+  <span id="lb-close"><i class="fas fa-times"></i></span>
+  <img id="lb-img" src="" alt=""/>
+  <div id="lb-cap"></div>
+</div>
+
+<!-- NAV -->
+<nav>
+  <a class="nav-logo" href="#home">RS</a>
+  <ul class="nav-links">
+    <li><a href="#home">Home</a></li>
+    <li><a href="#about">About</a></li>
+    <li><a href="#achievements">Achievements</a></li>
+    <li><a href="#projects">Projects</a></li>
+    <li><a href="#gallery">Gallery</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+  <div style="display:flex;align-items:center;gap:1rem;">
+    <button id="dark-toggle" title="Toggle theme"><i class="fas fa-sun"></i></button>
+    <div class="hamburger" id="hamburger"><span></span><span></span><span></span></div>
+  </div>
+</nav>
+<div class="mobile-nav" id="mobile-nav">
+  <a href="#home" onclick="closeMNav()">Home</a>
+  <a href="#about" onclick="closeMNav()">About</a>
+  <a href="#achievements" onclick="closeMNav()">Achievements</a>
+  <a href="#projects" onclick="closeMNav()">Projects</a>
+  <a href="#gallery" onclick="closeMNav()">Gallery</a>
+  <a href="#contact" onclick="closeMNav()">Contact</a>
+</div>
+
+<!-- ===== HERO ===== -->
+<section id="home" class="wrap" style="padding-top:80px;max-width:100%;padding-left:2rem;padding-right:2rem;">
+  <div class="hero-photo-wrap">
+    <!-- Replace avatar-ph with: <img src="images/profile.jpg" alt="Rehan Shaikh"/> -->
+    <div class="avatar-ph">RS</div>
+  </div>
+  <h1 class="hero-name">REHAN SHAIKH</h1>
+  <div class="hero-subtitle" id="typing-text"></div>
+  <p class="hero-desc">
+    First-year B.Tech student in Computer Science &amp; Engineering at MIT Vishwaprayag University, Solapur.
+    Passionate about Python, AI, Design Thinking, and building solutions at the intersection of science and technology.
+  </p>
+  <div class="hero-btns">
+    <a href="#projects" class="btn btn-primary"><i class="fas fa-rocket"></i> My Projects</a>
+    <a href="#contact" class="btn btn-outline"><i class="fas fa-envelope"></i> Contact Me</a>
+  </div>
+  <div class="hero-scroll"><i class="fas fa-chevron-down"></i></div>
+</section>
+
+<!-- ===== ABOUT ===== -->
+<section id="about">
+<div class="wrap">
+  <div class="section-title reveal">About Me</div>
+  <div class="divider reveal"></div>
+  <p class="section-sub reveal">Who I am &amp; what drives me</p>
+  <div class="about-grid">
+    <div class="acard reveal">
+      <h3><i class="fas fa-graduation-cap"></i>&nbsp; Education</h3>
+      <div class="info-row"><i class="fas fa-university"></i>MIT Vishwaprayag University, Solapur</div>
+      <div class="info-row"><i class="fas fa-code-branch"></i>B.Tech – Computer Science &amp; Engineering</div>
+      <div class="info-row"><i class="fas fa-calendar"></i>First Year (2024–2025)</div>
+      <div class="info-row"><i class="fas fa-map-marker-alt"></i>Solapur, Maharashtra</div>
+      <div class="info-row"><i class="fas fa-envelope"></i>rshaikhehan09@gmail.com</div>
+    </div>
+    <div class="acard reveal">
+      <h3><i class="fas fa-bullseye"></i>&nbsp; Goals &amp; Strengths</h3>
+      <ul>
+        <li>Build impactful AI-driven software</li>
+        <li>Master full-stack development</li>
+        <li>Contribute to interdisciplinary research</li>
+        <li>Strong analytical &amp; problem-solving skills</li>
+        <li>Creative thinker via Design Thinking</li>
+        <li>Fast learner &amp; dedicated team player</li>
+      </ul>
+    </div>
+    <div class="acard reveal">
+      <h3><i class="fas fa-laptop-code"></i>&nbsp; Technical Skills</h3>
+      <div class="skill-item"><div class="skill-label"><span>Python</span><span>80%</span></div><div class="skill-bar"><div class="skill-fill" data-width="80"></div></div></div>
+      <div class="skill-item"><div class="skill-label"><span>C Programming</span><span>60%</span></div><div class="skill-bar"><div class="skill-fill" data-width="60"></div></div></div>
+      <div class="skill-item"><div class="skill-label"><span>MATLAB</span><span>65%</span></div><div class="skill-bar"><div class="skill-fill" data-width="65"></div></div></div>
+      <div class="skill-item"><div class="skill-label"><span>HTML / CSS / JS</span><span>70%</span></div><div class="skill-bar"><div class="skill-fill" data-width="70"></div></div></div>
+      <div class="skill-item"><div class="skill-label"><span>AI &amp; ML Concepts</span><span>55%</span></div><div class="skill-bar"><div class="skill-fill" data-width="55"></div></div></div>
+    </div>
+    <div class="acard reveal">
+      <h3><i class="fas fa-heart"></i>&nbsp; Interests &amp; Hobbies</h3>
+      <ul>
+        <li>🏓 Table Tennis</li>
+        <li>🏸 Badminton</li>
+        <li>⚽ Football</li>
+        <li>🏐 Volleyball</li>
+        <li>🎸 Guitar (Learning)</li>
+        <li>🤖 Artificial Intelligence</li>
+        <li>🔬 Chemistry &amp; Sciences</li>
+      </ul>
+    </div>
+  </div>
+</div>
+</section>
+
+<!-- ===== ACHIEVEMENTS ===== -->
+<section id="achievements">
+<div class="wrap">
+  <div class="section-title reveal">Achievements</div>
+  <div class="divider reveal"></div>
+  <p class="section-sub reveal">Certificates, Awards &amp; Events</p>
+  <div class="ach-grid">
+
+    <div class="ach-card reveal">
+      <div class="ach-thumb">
+        <img src="images/matlab-coursera.jpg" alt="MATLAB Coursera"
+          onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"/>
+        <div class="ach-ph" style="display:none"><i class="fas fa-chart-line"></i>MATLAB Certificate</div>
+      </div>
+      <div class="ach-icon">📜</div>
+      <h3>MATLAB – Coursera</h3>
+      <p>Completed MATLAB on Coursera, gaining skills in matrix computing, data visualization, and scientific programming.</p>
+      <span class="badge">Coursera</span>
+    </div>
+
+    <div class="ach-card reveal">
+      <div class="ach-thumb">
+        <img src="images/chemistry-coursera.jpg" alt="Chemistry Coursera"
+          onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"/>
+        <div class="ach-ph" style="display:none"><i class="fas fa-flask"></i>Chemistry Coursera</div>
+      </div>
+      <div class="ach-icon">⚗️</div>
+      <h3>Revisiting Chemistry – Coursera</h3>
+      <p>Successfully completed the Revisiting Chemistry course, reinforcing core chemical concepts and modern applications.</p>
+      <span class="badge">Coursera</span>
+    </div>
+
+    <div class="ach-card reveal">
+      <div class="ach-thumb">
+        <img src="images/yuva-ai.jpg" alt="Yuva AI"
+          onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"/>
+        <div class="ach-ph" style="display:none"><i class="fas fa-robot"></i>Yuva AI Certificate</div>
+      </div>
+      <div class="ach-icon">🤖</div>
+      <h3>Yuva AI Program</h3>
+      <p>Completed Yuva AI, building foundational knowledge in AI, machine learning, and ethical AI principles.</p>
+      <span class="badge">Yuva AI</span>
+    </div>
+
+    <div class="ach-card reveal">
+      <div class="ach-thumb">
+        <div class="ach-ph"><i class="fas fa-network-wired"></i>NetAcad Certificate</div>
+      </div>
+      <div class="ach-icon">🌐</div>
+      <h3>Cisco NetAcad</h3>
+      <p>Completed Cisco Networking Academy certification in network fundamentals, IT essentials, and cybersecurity basics.</p>
+      <span class="badge">NetAcad</span>
+    </div>
+
+    <div class="ach-card reveal">
+      <div class="ach-thumb">
+        <img src="images/design-thinking.jpg" alt="Design Thinking"
+          onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"/>
+        <div class="ach-ph" style="display:none"><i class="fas fa-lightbulb"></i>Design Thinking</div>
+      </div>
+      <div class="ach-icon">💡</div>
+      <h3>Design Thinking Project</h3>
+      <p>Executed a full Design Thinking project — Empathize, Define, Ideate, Prototype, and Test — to solve real-world problems innovatively.</p>
+      <span class="badge">MIT VPU</span>
+    </div>
+
+    <div class="ach-card reveal">
+      <div class="ach-thumb">
+        <img src="images/table-tennis.jpg" alt="Table Tennis"
+          onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"/>
+        <div class="ach-ph" style="display:none"><i class="fas fa-table-tennis-paddle-ball"></i>Table Tennis</div>
+      </div>
+      <div class="ach-icon">🏓</div>
+      <h3>Table Tennis – Sports</h3>
+      <p>Active participant in inter-college Table Tennis events, demonstrating competitive spirit and quick reflexes.</p>
+      <span class="badge">Sports</span>
+    </div>
+
+    <div class="ach-card reveal">
+      <div class="ach-thumb">
+        <img src="images/badminton.jpg" alt="Badminton"
+          onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"/>
+        <div class="ach-ph" style="display:none"><i class="fas fa-certificate"></i>Badminton</div>
+      </div>
+      <div class="ach-icon">🏸</div>
+      <h3>Badminton – Sports</h3>
+      <p>Recognized participant in university Badminton competitions, showcasing agility, coordination, and sportsmanship.</p>
+      <span class="badge">Sports</span>
+    </div>
+
+    <div class="ach-card reveal">
+      <div class="ach-thumb">
+        <img src="images/football.jpg" alt="Football"
+          onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"/>
+        <div class="ach-ph" style="display:none"><i class="fas fa-futbol"></i>Football</div>
+      </div>
+      <div class="ach-icon">⚽</div>
+      <h3>Football – Sports Day</h3>
+      <p>Active player in college Football matches and Sports Day events, contributing to team strategy and demonstrating athleticism.</p>
+      <span class="badge">Sports</span>
+    </div>
+
+  </div>
+</div>
+</section>
+
+<!-- ===== PROJECTS ===== -->
+<section id="projects">
+<div class="wrap">
+  <div class="section-title reveal">Projects</div>
+  <div class="divider reveal"></div>
+  <p class="section-sub reveal">Work I'm proud of</p>
+  <div class="proj-grid">
+
+    <div class="proj-card reveal">
+      <div class="proj-img">
+        <img src="images/ai4a-project.jpg" alt="AI4A"
+          onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"/>
+        <div style="display:none;width:100%;height:100%;align-items:center;justify-content:center;">🤖</div>
+      </div>
+      <div class="proj-body">
+        <h3>AI for All (Ai4A) Project</h3>
+        <p>Developed an AI-based solution under the AI4A initiative exploring practical ML applications for everyday problem-solving and community accessibility.</p>
+        <div class="tags"><span class="tag">Python</span><span class="tag">Machine Learning</span><span class="tag">AI4A</span></div>
+        <div class="proj-links">
+          <a href="#"><i class="fab fa-github"></i> GitHub</a>
+          <a href="#"><i class="fas fa-external-link-alt"></i> Demo</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="proj-card reveal">
+      <div class="proj-img">
+        <img src="images/design-thinking-project.jpg" alt="Design Thinking"
+          onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"/>
+        <div style="display:none;width:100%;height:100%;align-items:center;justify-content:center;">💡</div>
+      </div>
+      <div class="proj-body">
+        <h3>Design Thinking Project</h3>
+        <p>Applied the 5-stage Design Thinking methodology — Empathize, Define, Ideate, Prototype, Test — to solve a real user problem with an innovative solution.</p>
+        <div class="tags"><span class="tag">Design Thinking</span><span class="tag">UX Research</span><span class="tag">Prototyping</span></div>
+        <div class="proj-links">
+          <a href="#"><i class="fab fa-github"></i> GitHub</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="proj-card reveal">
+      <div class="proj-img">
+        <img src="images/chemistry-project.jpg" alt="Chemistry ACE"
+          onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"/>
+        <div style="display:none;width:100%;height:100%;align-items:center;justify-content:center;">⚗️</div>
+      </div>
+      <div class="proj-body">
+        <h3>Chemistry Research (ACE Project)</h3>
+        <p>Conducted an interdisciplinary chemistry project under the ACE program — exploring reactions and their computational modeling using MATLAB and Python.</p>
+        <div class="tags"><span class="tag">Chemistry</span><span class="tag">MATLAB</span><span class="tag">Python</span><span class="tag">ACE</span></div>
+        <div class="proj-links">
+          <a href="#"><i class="fab fa-github"></i> GitHub</a>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+</section>
+
+<!-- ===== GALLERY ===== -->
+<section id="gallery">
+<div class="wrap">
+  <div class="section-title reveal">Gallery</div>
+  <div class="divider reveal"></div>
+  <p class="section-sub reveal">Photos, Certificates &amp; Memories — click to expand</p>
+  <div class="gal-grid">
+
+    <div class="gal-item reveal" data-src="images/table-tennis.jpg" data-cap="Table Tennis Certificate">
+      <img src="images/table-tennis.jpg" alt="Table Tennis" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"/>
+      <div class="gal-ph" style="display:none"><i class="fas fa-table-tennis-paddle-ball"></i>Table Tennis</div>
+      <div class="gal-ov"><i class="fas fa-expand"></i></div>
+    </div>
+
+    <div class="gal-item reveal" data-src="images/badminton.jpg" data-cap="Badminton Certificate">
+      <img src="images/badminton.jpg" alt="Badminton" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"/>
+      <div class="gal-ph" style="display:none"><i class="fas fa-certificate"></i>Badminton</div>
+      <div class="gal-ov"><i class="fas fa-expand"></i></div>
+    </div>
+
+    <div class="gal-item reveal" data-src="images/football.jpg" data-cap="Football Certificate">
+      <img src="images/football.jpg" alt="Football" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"/>
+      <div class="gal-ph" style="display:none"><i class="fas fa-futbol"></i>Football</div>
+      <div class="gal-ov"><i class="fas fa-expand"></i></div>
+    </div>
+
+    <div class="gal-item reveal" data-src="images/yuva-ai.jpg" data-cap="Yuva AI Certificate">
+      <img src="images/yuva-ai.jpg" alt="Yuva AI" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"/>
+      <div class="gal-ph" style="display:none"><i class="fas fa-robot"></i>Yuva AI</div>
+      <div class="gal-ov"><i class="fas fa-expand"></i></div>
+    </div>
+
+    <div class="gal-item reveal" data-src="images/chemistry-coursera.jpg" data-cap="Chemistry Coursera Certificate">
+      <img src="images/chemistry-coursera.jpg" alt="Chemistry Coursera" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"/>
+      <div class="gal-ph" style="display:none"><i class="fas fa-flask"></i>Chemistry Coursera</div>
+      <div class="gal-ov"><i class="fas fa-expand"></i></div>
+    </div>
+
+    <div class="gal-item reveal" data-src="images/design-thinking.jpg" data-cap="Design Thinking Project">
+      <img src="images/design-thinking.jpg" alt="Design Thinking" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"/>
+      <div class="gal-ph" style="display:none"><i class="fas fa-lightbulb"></i>Design Thinking</div>
+      <div class="gal-ov"><i class="fas fa-expand"></i></div>
+    </div>
+
+    <div class="gal-item reveal" data-src="images/chemistry-project.jpg" data-cap="Chemistry ACE Project">
+      <img src="images/chemistry-project.jpg" alt="Chemistry Project" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"/>
+      <div class="gal-ph" style="display:none"><i class="fas fa-atom"></i>Chemistry Project</div>
+      <div class="gal-ov"><i class="fas fa-expand"></i></div>
+    </div>
+
+    <div class="gal-item reveal" data-src="images/sports-day.jpg" data-cap="Sports Day">
+      <img src="images/sports-day.jpg" alt="Sports Day" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"/>
+      <div class="gal-ph" style="display:none"><i class="fas fa-trophy"></i>Sports Day</div>
+      <div class="gal-ov"><i class="fas fa-expand"></i></div>
+    </div>
+
+    <div class="gal-item reveal" data-src="images/matlab-coursera.jpg" data-cap="MATLAB Coursera Certificate">
+      <img src="images/matlab-coursera.jpg" alt="MATLAB" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"/>
+      <div class="gal-ph" style="display:none"><i class="fas fa-chart-line"></i>MATLAB Coursera</div>
+      <div class="gal-ov"><i class="fas fa-expand"></i></div>
+    </div>
+
+  </div>
+</div>
+</section>
+
+<!-- ===== CONTACT ===== -->
+<section id="contact">
+<div class="wrap">
+  <div class="section-title reveal">Contact</div>
+  <div class="divider reveal"></div>
+  <p class="section-sub reveal">Let's connect &amp; collaborate</p>
+  <div class="contact-grid">
+    <div class="reveal">
+      <h3 style="font-family:var(--font-head);color:var(--accent);font-size:.9rem;letter-spacing:2px;margin-bottom:1.5rem;">REACH ME AT</h3>
+      <a class="clink" href="mailto:rshaikhehan09@gmail.com"><i class="fas fa-envelope"></i><span>rshaikhehan09@gmail.com</span></a>
+      <a class="clink" href="https://github.com/" target="_blank"><i class="fab fa-github"></i><span>GitHub – Rehan Shaikh</span></a>
+      <a class="clink" href="https://linkedin.com/" target="_blank"><i class="fab fa-linkedin"></i><span>LinkedIn – Rehan Shaikh</span></a>
+      <a class="clink" href="tel:+91XXXXXXXXXX"><i class="fas fa-phone"></i><span>+91 XXXXXXXXXX</span></a>
+      <a class="clink" href="#"><i class="fas fa-map-marker-alt"></i><span>Solapur, Maharashtra, India</span></a>
+    </div>
+    <div class="cform reveal">
+      <h3>SEND A MESSAGE</h3>
+      <div class="fg"><label>YOUR NAME</label><input type="text" placeholder="Enter your name"/></div>
+      <div class="fg"><label>YOUR EMAIL</label><input type="email" placeholder="Enter your email"/></div>
+      <div class="fg"><label>MESSAGE</label><textarea placeholder="Write your message..."></textarea></div>
+      <button class="btn btn-primary" style="width:100%;justify-content:center;" onclick="alert('Message sent! I will get back to you soon. 🙌')">
+        <i class="fas fa-paper-plane"></i>&nbsp;Send Message
+      </button>
+    </div>
+  </div>
+</div>
+</section>
+
+<footer>
+  <p>Designed &amp; Built with ❤️ by <span>Rehan Shaikh</span> &nbsp;|&nbsp; MIT Vishwaprayag University, Solapur &nbsp;|&nbsp; 2025</p>
+</footer>
+
+<!-- ===== JAVASCRIPT ===== -->
+<script>
+/* ---- CURSOR ---- */
+const dot=document.getElementById('cursor-dot'),ring=document.getElementById('cursor-ring');
+let mx=0,my=0,rx=0,ry=0;
+document.addEventListener('mousemove',e=>{mx=e.clientX;my=e.clientY;dot.style.left=mx+'px';dot.style.top=my+'px';});
+function animRing(){rx+=(mx-rx)*.12;ry+=(my-ry)*.12;ring.style.left=rx+'px';ring.style.top=ry+'px';requestAnimationFrame(animRing);}
+animRing();
+document.querySelectorAll('a,button,.gal-item,.ach-card,.proj-card').forEach(el=>{
+  el.addEventListener('mouseenter',()=>{dot.style.width='14px';dot.style.height='14px';dot.style.background='var(--accent3)';ring.style.width='54px';ring.style.height='54px';ring.style.borderColor='var(--accent3)';});
+  el.addEventListener('mouseleave',()=>{dot.style.width='8px';dot.style.height='8px';dot.style.background='var(--accent)';ring.style.width='36px';ring.style.height='36px';ring.style.borderColor='var(--accent)';});
+});
+
+/* ---- PARTICLES ---- */
+const canvas=document.getElementById('particles'),ctx=canvas.getContext('2d');
+let W,H,pts=[];
+function resize(){W=canvas.width=window.innerWidth;H=canvas.height=window.innerHeight;}
+resize();window.addEventListener('resize',resize);
+function rp(){return{x:Math.random()*W,y:Math.random()*H,vx:(Math.random()-.5)*.45,vy:(Math.random()-.5)*.45,r:Math.random()*1.4+.3,a:Math.random()*.5+.1,c:Math.random()>.5?'0,212,255':'123,47,255'};}
+for(let i=0;i<110;i++)pts.push(rp());
+function draw(){
+  ctx.clearRect(0,0,W,H);
+  pts.forEach(p=>{
+    p.x+=p.vx;p.y+=p.vy;
+    if(p.x<0)p.x=W;if(p.x>W)p.x=0;if(p.y<0)p.y=H;if(p.y>H)p.y=0;
+    ctx.beginPath();ctx.arc(p.x,p.y,p.r,0,Math.PI*2);ctx.fillStyle=`rgba(${p.c},${p.a})`;ctx.fill();
+  });
+  for(let i=0;i<pts.length;i++)for(let j=i+1;j<pts.length;j++){
+    const dx=pts[i].x-pts[j].x,dy=pts[i].y-pts[j].y,d=Math.sqrt(dx*dx+dy*dy);
+    if(d<90){ctx.beginPath();ctx.strokeStyle=`rgba(0,212,255,${.07*(1-d/90)})`;ctx.lineWidth=.5;ctx.moveTo(pts[i].x,pts[i].y);ctx.lineTo(pts[j].x,pts[j].y);ctx.stroke();}
+  }
+  requestAnimationFrame(draw);
+}
+draw();
+
+/* ---- TYPING EFFECT ---- */
+const phrases=['B.Tech CSE Student','Python Developer','AI Enthusiast','Design Thinker','Sports Lover 🏓🏸⚽','Guitar Learner 🎸'];
+let pi=0,ci=0,del=false;
+const tel=document.getElementById('typing-text');
+function type(){
+  const p=phrases[pi];
+  if(!del){tel.textContent=p.substring(0,ci+1)+'|';ci++;if(ci===p.length){del=true;setTimeout(type,1400);return;}}
+  else{tel.textContent=p.substring(0,ci-1)+'|';ci--;if(ci===0){del=false;pi=(pi+1)%phrases.length;}}
+  setTimeout(type,del?50:90);
+}
+type();
+
+/* ---- DARK MODE ---- */
+const tb=document.getElementById('dark-toggle');let lm=false;
+tb.addEventListener('click',()=>{lm=!lm;document.body.classList.toggle('light-mode',lm);tb.innerHTML=lm?'<i class="fas fa-moon"></i>':'<i class="fas fa-sun"></i>';});
+
+/* ---- MOBILE NAV ---- */
+const hb=document.getElementById('hamburger'),mn=document.getElementById('mobile-nav');
+hb.addEventListener('click',()=>mn.classList.toggle('open'));
+function closeMNav(){mn.classList.remove('open');}
+
+/* ---- SCROLL REVEAL ---- */
+const obs=new IntersectionObserver((entries)=>{
+  entries.forEach((e,i)=>{if(e.isIntersecting)setTimeout(()=>e.target.classList.add('visible'),i*70);});
+},{threshold:.1});
+document.querySelectorAll('.reveal').forEach(el=>obs.observe(el));
+
+/* ---- SKILL BARS ---- */
+const skillObs=new IntersectionObserver((entries)=>{
+  entries.forEach(e=>{if(e.isIntersecting)e.target.querySelectorAll('.skill-fill').forEach(b=>b.style.width=b.dataset.width+'%');});
+},{threshold:.3});
+document.querySelectorAll('.acard').forEach(c=>skillObs.observe(c));
+
+/* ---- LIGHTBOX ---- */
+const lb=document.getElementById('lightbox'),lbImg=document.getElementById('lb-img'),lbCap=document.getElementById('lb-cap');
+document.querySelectorAll('.gal-item').forEach(item=>{
+  item.addEventListener('click',()=>{
+    const src=item.dataset.src;if(!src)return;
+    lbImg.src=src;lbCap.textContent=item.dataset.cap||'';lb.classList.add('active');
+  });
+});
+document.getElementById('lb-close').addEventListener('click',()=>lb.classList.remove('active'));
+lb.addEventListener('click',e=>{if(e.target===lb)lb.classList.remove('active');});
+document.addEventListener('keydown',e=>{if(e.key==='Escape')lb.classList.remove('active');});
+
+/* ---- ACTIVE NAV ---- */
+const secs=document.querySelectorAll('section[id]'),navAs=document.querySelectorAll('.nav-links a');
+window.addEventListener('scroll',()=>{
+  let cur='';
+  secs.forEach(s=>{if(window.scrollY>=s.offsetTop-120)cur=s.id;});
+  navAs.forEach(a=>{a.style.color=a.getAttribute('href')==='#'+cur?'var(--accent)':'';});
+});
+</script>
+</body>
+</html>
